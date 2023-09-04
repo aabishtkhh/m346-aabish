@@ -1,0 +1,16 @@
+# Screenshots von den Aufgaben:
+## 4.1 EC2:
+### HTML Seite, ink. URL
+<b>Screenshots</b>
+
+### Liste der EC2 Instanzen
+<b>Screenshots</b>
+
+### Details der EC2 
+<b>Screenshots</b>
+
+### Details der Web Server-Instanz (öffentliche IP sichtbar)
+<b>Screenshots</b>
+
+### Security-Group: Liste der Inbound-Regeln.
+<b>Screenshots</b>
