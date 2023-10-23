@@ -1,0 +1,57 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCHMNryy4BSaIMLNdljK0jUcPNRNsgBvOnKXW8I90bQRL6YXK5lRjGAsdIvWBqlOHR+ISrucrzsdrU9K3AuA1sImwHi8UAEALFDikPjF+BZvVG0tvUTkW3L4kQQo2Nd7HeJq5oxcQQUI6vUsbrKvpcS0Ee9xOyGZ/WRne9+AxN3qsbiyQaf2a18cpA/hu7+031/kyNItXFBl+9gm+Rbq6pDNL0
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0WGP1EZykEtv5YGC9nMiPFW3U3DmZNzKFO5nEu6uozEHh4jLZzPNHSrfFTuQ2GnRDSt+XbOtTLdcj26+iPNiFoFha42aCIzYjt6V8Z+SQ9pzF4jPPzxwXfDdkEWylgoNnZ+4MG1lNFqa8aO7F62tX0Yj5khjC0Bs7Mb2cHLx1XZaxJV6qSaulDuBbLYe8QUZXkMc7wmob3PM0
+    ssh_pwauth: false
+    disable_root: false
+
+package_update: true
+packages:
+  - apache2
+  - curl
+  - wget
+  - php
+  - libapache2-mod-php
+
+runcmd:
+  - sudo systemctl restart apache2
+
+write_files:
+  - content: |
+      <?php
+        $ihrname = "Aabish Tariq Khan";
+      ?>
+    path: /var/www/html/image.php
+    permissions: "0644"
+    owner: root:root
+
+  - content: |
+      <html>
+      <head>
+        <title><?php echo $ihrname; ?></title>
+      </head>
+      <body>
+        Auf dem Bild sieht man Bergen ein grosser See und es ist recht dunkel.
+        <br />
+        <img src="http://kn04-aabish.s3.amazonaws.com/image.jpeg"/>
+        <br />
+        Platzieren Sie hier notwendige Quellenangaben: kann es nicht finden
+      </body>
+      </html>
+    path: /var/www/html/image.php
+    permissions: "0644"
+    owner: root:root
+
+  - content: |
+      <?php
+        phpinfo();
+      ?>
+    path: /var/www/html/info.php
+    permissions: "0644"
+    owner: root:root
