@@ -1,0 +1,22 @@
+#cloud-config
+users:
+  - name: ubuntu
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - xxxaaabbbcccxxx
+  - name: tbz
+    active: false
+    ssh_pwauth: false
+
+write_files:
+  - content: |
+      # Set the hostname to "aabish"
+      aabish
+    path: /etc/hostname
+    permissions: "0644"
+
+runcmd:
+  - hostnamectl set-hostname aabish
+  - systemctl restart systemd-hostnamed
